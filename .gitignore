@@ -11,5 +11,17 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+.idea
+*.iml
+
+webapp/node_modules
+webapp/.pnp
+webapp/.pnp.js
+webapp/coverage
+webapp/build
+webapp/.DS_Store
+webapp/.env.local
+webapp/.env.development.local
+webapp/.env.test.local
+webapp/.env.production.local
+webapp/npm-debug.log*

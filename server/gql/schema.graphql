@@ -1,0 +1,18 @@
+type Programmer {
+    id: ID!
+    name: String!
+    picture: String
+    company: String!
+    skills: [Skill!]!
+}
+
+type Skill {
+    id: ID!
+    name: String!
+    picture: String
+    importance: Int!
+}
+
+type Query {
+    programmers: [Programmer!]!
+}
