@@ -1,4 +1,4 @@
-SKMZ
+SKMZ [![Build Status](https://travis-ci.com/Shpota/skmz.svg?branch=master)](https://travis-ci.com/Shpota/skmz)
 ====
 
 A web application that allows to query programmers
