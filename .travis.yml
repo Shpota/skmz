@@ -1,0 +1,24 @@
+matrix:
+  include:
+    - language: go
+      go:
+        - 1.13.x
+      install: true
+      before_script:
+        - cd server
+      script:
+        - go test
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
+
+    - language: node_js
+      node_js:
+        - 12
+      env:
+        - CI=true
+      before_script:
+        - cd webapp
+        - npm i
+      script: npm run test --no-watch --no-progress --browsers=ChromeHeadless
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
