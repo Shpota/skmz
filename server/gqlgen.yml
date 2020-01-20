@@ -1,0 +1,10 @@
+schema:
+- gql/schema.graphql
+exec:
+  filename: gql/generated.go
+model:
+  filename: gql/models_gen.go
+resolver:
+  filename: gql/resolver.go
+  type: Resolver
+autobind: []
