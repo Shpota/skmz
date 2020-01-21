@@ -9,7 +9,7 @@ type Programmer {
 type Skill {
     id: ID!
     name: String!
-    picture: String
+    icon: String
     importance: Int!
 }
 

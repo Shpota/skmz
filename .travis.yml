@@ -7,7 +7,7 @@ matrix:
       before_script:
         - cd server
       script:
-        - go test
+        - go test -v ./cors -race -coverprofile=coverage.txt -covermode=atomic
       after_success:
         - bash <(curl -s https://codecov.io/bash)
 
