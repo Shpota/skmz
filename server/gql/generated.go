@@ -55,9 +55,9 @@ type ComplexityRoot struct {
 
 	Skill struct {
 		ID         func(childComplexity int) int
+		Icon       func(childComplexity int) int
 		Importance func(childComplexity int) int
 		Name       func(childComplexity int) int
-		Picture    func(childComplexity int) int
 	}
 }
 
@@ -129,6 +129,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Skill.ID(childComplexity), true
 
+	case "Skill.icon":
+		if e.complexity.Skill.Icon == nil {
+			break
+		}
+
+		return e.complexity.Skill.Icon(childComplexity), true
+
 	case "Skill.importance":
 		if e.complexity.Skill.Importance == nil {
 			break
@@ -142,13 +149,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Skill.Name(childComplexity), true
-
-	case "Skill.picture":
-		if e.complexity.Skill.Picture == nil {
-			break
-		}
-
-		return e.complexity.Skill.Picture(childComplexity), true
 
 	}
 	return 0, false
@@ -210,7 +210,7 @@ var parsedSchema = gqlparser.MustLoadSchema(
 type Skill {
     id: ID!
     name: String!
-    picture: String
+    icon: String
     importance: Int!
 }
 
@@ -642,7 +642,7 @@ func (ec *executionContext) _Skill_name(ctx context.Context, field graphql.Colle
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Skill_picture(ctx context.Context, field graphql.CollectedField, obj *Skill) (ret graphql.Marshaler) {
+func (ec *executionContext) _Skill_icon(ctx context.Context, field graphql.CollectedField, obj *Skill) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -661,7 +661,7 @@ func (ec *executionContext) _Skill_picture(ctx context.Context, field graphql.Co
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Picture, nil
+		return obj.Icon, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1981,8 +1981,8 @@ func (ec *executionContext) _Skill(ctx context.Context, sel ast.SelectionSet, ob
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "picture":
-			out.Values[i] = ec._Skill_picture(ctx, field, obj)
+		case "icon":
+			out.Values[i] = ec._Skill_icon(ctx, field, obj)
 		case "importance":
 			out.Values[i] = ec._Skill_importance(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
