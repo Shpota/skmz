@@ -1,0 +1,19 @@
+.skill {
+    background-color: lightgrey;
+    display: inline-block;
+    align-self: flex-end;
+    padding: 10px;
+    margin-right: 8px;
+}
+
+.skill:hover {
+    background-color: darkgrey;
+}
+
+.skills {
+    display: flex;
+}
+
+.boldText {
+    font-weight: bold;
+}

@@ -12,6 +12,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
+	"github.com/shpota/skmz/model"
 	"github.com/vektah/gqlparser"
 	"github.com/vektah/gqlparser/ast"
 )
@@ -62,7 +63,7 @@ type ComplexityRoot struct {
 }
 
 type QueryResolver interface {
-	Programmers(ctx context.Context) ([]*Programmer, error)
+	Programmers(ctx context.Context) ([]*model.Programmer, error)
 }
 
 type executableSchema struct {
@@ -274,7 +275,7 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _Programmer_id(ctx context.Context, field graphql.CollectedField, obj *Programmer) (ret graphql.Marshaler) {
+func (ec *executionContext) _Programmer_id(ctx context.Context, field graphql.CollectedField, obj *model.Programmer) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -311,7 +312,7 @@ func (ec *executionContext) _Programmer_id(ctx context.Context, field graphql.Co
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Programmer_name(ctx context.Context, field graphql.CollectedField, obj *Programmer) (ret graphql.Marshaler) {
+func (ec *executionContext) _Programmer_name(ctx context.Context, field graphql.CollectedField, obj *model.Programmer) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -348,7 +349,7 @@ func (ec *executionContext) _Programmer_name(ctx context.Context, field graphql.
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Programmer_picture(ctx context.Context, field graphql.CollectedField, obj *Programmer) (ret graphql.Marshaler) {
+func (ec *executionContext) _Programmer_picture(ctx context.Context, field graphql.CollectedField, obj *model.Programmer) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -382,7 +383,7 @@ func (ec *executionContext) _Programmer_picture(ctx context.Context, field graph
 	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Programmer_company(ctx context.Context, field graphql.CollectedField, obj *Programmer) (ret graphql.Marshaler) {
+func (ec *executionContext) _Programmer_company(ctx context.Context, field graphql.CollectedField, obj *model.Programmer) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -419,7 +420,7 @@ func (ec *executionContext) _Programmer_company(ctx context.Context, field graph
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Programmer_skills(ctx context.Context, field graphql.CollectedField, obj *Programmer) (ret graphql.Marshaler) {
+func (ec *executionContext) _Programmer_skills(ctx context.Context, field graphql.CollectedField, obj *model.Programmer) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -450,10 +451,10 @@ func (ec *executionContext) _Programmer_skills(ctx context.Context, field graphq
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*Skill)
+	res := resTmp.([]*model.Skill)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNSkill2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐSkillᚄ(ctx, field.Selections, res)
+	return ec.marshalNSkill2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐSkillᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_programmers(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -487,10 +488,10 @@ func (ec *executionContext) _Query_programmers(ctx context.Context, field graphq
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*Programmer)
+	res := resTmp.([]*model.Programmer)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNProgrammer2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐProgrammerᚄ(ctx, field.Selections, res)
+	return ec.marshalNProgrammer2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐProgrammerᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -568,7 +569,7 @@ func (ec *executionContext) _Query___schema(ctx context.Context, field graphql.C
 	return ec.marshalO__Schema2ᚖgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Skill_id(ctx context.Context, field graphql.CollectedField, obj *Skill) (ret graphql.Marshaler) {
+func (ec *executionContext) _Skill_id(ctx context.Context, field graphql.CollectedField, obj *model.Skill) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -605,7 +606,7 @@ func (ec *executionContext) _Skill_id(ctx context.Context, field graphql.Collect
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Skill_name(ctx context.Context, field graphql.CollectedField, obj *Skill) (ret graphql.Marshaler) {
+func (ec *executionContext) _Skill_name(ctx context.Context, field graphql.CollectedField, obj *model.Skill) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -642,7 +643,7 @@ func (ec *executionContext) _Skill_name(ctx context.Context, field graphql.Colle
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Skill_icon(ctx context.Context, field graphql.CollectedField, obj *Skill) (ret graphql.Marshaler) {
+func (ec *executionContext) _Skill_icon(ctx context.Context, field graphql.CollectedField, obj *model.Skill) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -676,7 +677,7 @@ func (ec *executionContext) _Skill_icon(ctx context.Context, field graphql.Colle
 	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Skill_importance(ctx context.Context, field graphql.CollectedField, obj *Skill) (ret graphql.Marshaler) {
+func (ec *executionContext) _Skill_importance(ctx context.Context, field graphql.CollectedField, obj *model.Skill) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -1874,7 +1875,7 @@ func (ec *executionContext) ___Type_ofType(ctx context.Context, field graphql.Co
 
 var programmerImplementors = []string{"Programmer"}
 
-func (ec *executionContext) _Programmer(ctx context.Context, sel ast.SelectionSet, obj *Programmer) graphql.Marshaler {
+func (ec *executionContext) _Programmer(ctx context.Context, sel ast.SelectionSet, obj *model.Programmer) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.RequestContext, sel, programmerImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -1962,7 +1963,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 
 var skillImplementors = []string{"Skill"}
 
-func (ec *executionContext) _Skill(ctx context.Context, sel ast.SelectionSet, obj *Skill) graphql.Marshaler {
+func (ec *executionContext) _Skill(ctx context.Context, sel ast.SelectionSet, obj *model.Skill) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.RequestContext, sel, skillImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -2286,11 +2287,11 @@ func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.Selecti
 	return res
 }
 
-func (ec *executionContext) marshalNProgrammer2githubᚗcomᚋshpotaᚋskmzᚋgqlᚐProgrammer(ctx context.Context, sel ast.SelectionSet, v Programmer) graphql.Marshaler {
+func (ec *executionContext) marshalNProgrammer2githubᚗcomᚋshpotaᚋskmzᚋmodelᚐProgrammer(ctx context.Context, sel ast.SelectionSet, v model.Programmer) graphql.Marshaler {
 	return ec._Programmer(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNProgrammer2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐProgrammerᚄ(ctx context.Context, sel ast.SelectionSet, v []*Programmer) graphql.Marshaler {
+func (ec *executionContext) marshalNProgrammer2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐProgrammerᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Programmer) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2314,7 +2315,7 @@ func (ec *executionContext) marshalNProgrammer2ᚕᚖgithubᚗcomᚋshpotaᚋskm
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNProgrammer2ᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐProgrammer(ctx, sel, v[i])
+			ret[i] = ec.marshalNProgrammer2ᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐProgrammer(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2327,7 +2328,7 @@ func (ec *executionContext) marshalNProgrammer2ᚕᚖgithubᚗcomᚋshpotaᚋskm
 	return ret
 }
 
-func (ec *executionContext) marshalNProgrammer2ᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐProgrammer(ctx context.Context, sel ast.SelectionSet, v *Programmer) graphql.Marshaler {
+func (ec *executionContext) marshalNProgrammer2ᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐProgrammer(ctx context.Context, sel ast.SelectionSet, v *model.Programmer) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -2337,11 +2338,11 @@ func (ec *executionContext) marshalNProgrammer2ᚖgithubᚗcomᚋshpotaᚋskmz�
 	return ec._Programmer(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNSkill2githubᚗcomᚋshpotaᚋskmzᚋgqlᚐSkill(ctx context.Context, sel ast.SelectionSet, v Skill) graphql.Marshaler {
+func (ec *executionContext) marshalNSkill2githubᚗcomᚋshpotaᚋskmzᚋmodelᚐSkill(ctx context.Context, sel ast.SelectionSet, v model.Skill) graphql.Marshaler {
 	return ec._Skill(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNSkill2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐSkillᚄ(ctx context.Context, sel ast.SelectionSet, v []*Skill) graphql.Marshaler {
+func (ec *executionContext) marshalNSkill2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐSkillᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Skill) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2365,7 +2366,7 @@ func (ec *executionContext) marshalNSkill2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋg
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNSkill2ᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐSkill(ctx, sel, v[i])
+			ret[i] = ec.marshalNSkill2ᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐSkill(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2378,7 +2379,7 @@ func (ec *executionContext) marshalNSkill2ᚕᚖgithubᚗcomᚋshpotaᚋskmzᚋg
 	return ret
 }
 
-func (ec *executionContext) marshalNSkill2ᚖgithubᚗcomᚋshpotaᚋskmzᚋgqlᚐSkill(ctx context.Context, sel ast.SelectionSet, v *Skill) graphql.Marshaler {
+func (ec *executionContext) marshalNSkill2ᚖgithubᚗcomᚋshpotaᚋskmzᚋmodelᚐSkill(ctx context.Context, sel ast.SelectionSet, v *model.Skill) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
