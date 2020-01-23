@@ -2,9 +2,13 @@ package gql
 
 import (
 	"context"
+	"github.com/shpota/skmz/db"
+	"github.com/shpota/skmz/model"
 )
 
-type Resolver struct{}
+type Resolver struct {
+	DB *db.DB
+}
 
 func (r *Resolver) Query() QueryResolver {
 	return &queryResolver{r}
@@ -12,9 +16,6 @@ func (r *Resolver) Query() QueryResolver {
 
 type queryResolver struct{ *Resolver }
 
-func (r *queryResolver) Programmers(ctx context.Context) ([]*Programmer, error) {
-	// A stub. Will be updated later.
-	skill := Skill{ID: "sk123", Name: "Java", Importance: 10}
-	programmer := Programmer{ID: "12345", Name: "John Doe", Company: "Doe LTD", Skills: []*Skill{&skill}}
-	return []*Programmer{&programmer}, nil
+func (r *queryResolver) Programmers(ctx context.Context) ([]*model.Programmer, error) {
+	return r.DB.GetProgrammers()
 }

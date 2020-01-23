@@ -12,7 +12,7 @@ You need to have [Docker](https://www.docker.com)
 installed in order to build and run the application.
 No additional tools required.
 
-## How to build and run
+## How to build and run (<span style="color:red">in progress</span>)
 1. Build the application image:
     ```shell script
     docker build -t skmz .
