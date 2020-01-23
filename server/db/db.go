@@ -21,7 +21,6 @@ func New(client *mongo.Client) *DB {
 
 func (db DB) GetProgrammers() ([]*model.Programmer, error) {
 	res, err := db.collection.Find(context.TODO(), bson.M{})
-	println(res == nil)
 	if err != nil {
 		log.Printf("Error while fetching programmers: %s", err.Error())
 		return nil, err
@@ -32,6 +31,5 @@ func (db DB) GetProgrammers() ([]*model.Programmer, error) {
 		log.Printf("Error while decoding programmers: %s", err.Error())
 		return nil, err
 	}
-	println(p)
 	return p, nil
 }
