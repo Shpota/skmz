@@ -14,36 +14,37 @@ import (
 )
 
 func main() {
-	profile := os.Getenv("profile")
-	opts := options.Client().ApplyURI(
-		"mongodb://" + dbHost(profile) + ":27017",
-	)
-	client, err := mongo.Connect(context.TODO(), opts)
+	client, err := mongoClient()
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer client.Disconnect(context.TODO())
-	resolver := &gql.Resolver{
-		DB: db.New(client),
-	}
-	hndlr := handler.GraphQL(gql.NewExecutableSchema(gql.Config{
-		Resolvers: resolver,
-	}))
-
-	if profile != "prod" {
-		hndlr = cors.Disable(hndlr)
-		http.Handle("/playground",
-			handler.Playground("GraphQL playground", "/query"),
-		)
-	}
-	http.Handle("/query", hndlr)
+	http.Handle("/query", gqlHandler(db.New(client)))
+	http.Handle("/playground",
+		handler.Playground("GraphQL playground", "/query"),
+	)
 	http.Handle("/", http.FileServer(http.Dir("/webapp")))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func dbHost(profile string) string {
-	if profile != "prod" {
-		return "localhost"
+func gqlHandler(db *db.DB) http.HandlerFunc {
+	config := gql.Config{
+		Resolvers: &gql.Resolver{DB: db},
 	}
-	return "db"
+	gh := handler.GraphQL(gql.NewExecutableSchema(config))
+	if os.Getenv("profile") != "prod" {
+		gh = cors.Disable(gh)
+	}
+	return gh
+}
+
+func mongoClient() (*mongo.Client, error) {
+	host := "db"
+	if os.Getenv("profile") != "prod" {
+		host = "localhost"
+	}
+	opts := options.Client().ApplyURI(
+		"mongodb://" + host + ":27017",
+	)
+	return mongo.Connect(context.TODO(), opts)
 }

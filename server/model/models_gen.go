@@ -5,6 +5,7 @@ package model
 type Programmer struct {
 	ID      string   `json:"id"`
 	Name    string   `json:"name"`
+	Title   string   `json:"title"`
 	Picture *string  `json:"picture"`
 	Company string   `json:"company"`
 	Skills  []*Skill `json:"skills"`

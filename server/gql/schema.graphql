@@ -1,6 +1,7 @@
 type Programmer {
     id: ID!
     name: String!
+    title: String!
     picture: String
     company: String!
     skills: [Skill!]!
