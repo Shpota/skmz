@@ -12,7 +12,7 @@ type MockDB struct {
 	collection *mongo.Collection
 }
 
-func (mockDB MockDB) GetProgrammers() ([]*model.Programmer, error) {
+func (mockDB MockDB) GetProgrammers(string) ([]*model.Programmer, error) {
 	return []*model.Programmer{{ID: "test-id"}}, errors.New("test-error")
 }
 
@@ -21,7 +21,7 @@ func TestProgrammers(t *testing.T) {
 		Resolver: &Resolver{&MockDB{}},
 	}
 
-	programmers, err := r.Programmers(context.TODO())
+	programmers, err := r.Programmers(context.TODO(), "test")
 
 	if programmers[0].ID != "test-id" {
 		t.Errorf("GetProgrammers() got = %v, want test-id", programmers[0].ID)

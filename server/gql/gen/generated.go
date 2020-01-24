@@ -52,7 +52,7 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		Programmers func(childComplexity int) int
+		Programmers func(childComplexity int, skill string) int
 	}
 
 	Skill struct {
@@ -64,7 +64,7 @@ type ComplexityRoot struct {
 }
 
 type QueryResolver interface {
-	Programmers(ctx context.Context) ([]*model.Programmer, error)
+	Programmers(ctx context.Context, skill string) ([]*model.Programmer, error)
 }
 
 type executableSchema struct {
@@ -129,7 +129,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Query.Programmers(childComplexity), true
+		args, err := ec.field_Query_programmers_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Programmers(childComplexity, args["skill"].(string)), true
 
 	case "Skill.id":
 		if e.complexity.Skill.ID == nil {
@@ -225,7 +230,7 @@ type Skill {
 }
 
 type Query {
-    programmers: [Programmer!]!
+    programmers(skill: String!): [Programmer!]!
 }
 `},
 )
@@ -245,6 +250,20 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 		}
 	}
 	args["name"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_programmers_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["skill"]; ok {
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["skill"] = arg0
 	return args, nil
 }
 
@@ -519,10 +538,17 @@ func (ec *executionContext) _Query_programmers(ctx context.Context, field graphq
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_programmers_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Programmers(rctx)
+		return ec.resolvers.Query().Programmers(rctx, args["skill"].(string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)

@@ -9,7 +9,7 @@ import (
 )
 
 type DB interface {
-	GetProgrammers() ([]*model.Programmer, error)
+	GetProgrammers(skill string) ([]*model.Programmer, error)
 }
 
 type MongoDB struct {
@@ -23,8 +23,8 @@ func New(client *mongo.Client) *MongoDB {
 	}
 }
 
-func (db MongoDB) GetProgrammers() ([]*model.Programmer, error) {
-	res, err := db.collection.Find(context.TODO(), bson.M{})
+func (db MongoDB) GetProgrammers(skill string) ([]*model.Programmer, error) {
+	res, err := db.collection.Find(context.TODO(), db.filter(skill))
 	if err != nil {
 		log.Printf("Error while fetching programmers: %s", err.Error())
 		return nil, err
@@ -36,4 +36,17 @@ func (db MongoDB) GetProgrammers() ([]*model.Programmer, error) {
 		return nil, err
 	}
 	return p, nil
+}
+
+func (db MongoDB) filter(skill string) bson.D {
+	return bson.D{{
+		"skills.name",
+		bson.D{{
+			"$regex",
+			"^" + skill + ".*$",
+		}, {
+			"$options",
+			"i",
+		}},
+	}}
 }
