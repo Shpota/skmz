@@ -1,9 +1,9 @@
 schema:
 - gql/schema.graphql
 exec:
-  filename: gql/generated.go
+  filename: gql/gen/generated.go
 model:
-  filename: model/models_gen.go
+  filename: model/models.go
 resolver:
   filename: gql/resolver.go
   type: Resolver

@@ -8,18 +8,22 @@ import (
 	"log"
 )
 
-type DB struct {
+type DB interface {
+	GetProgrammers() ([]*model.Programmer, error)
+}
+
+type MongoDB struct {
 	collection *mongo.Collection
 }
 
-func New(client *mongo.Client) *DB {
+func New(client *mongo.Client) *MongoDB {
 	programmers := client.Database("programmers").Collection("programmers")
-	return &DB{
+	return &MongoDB{
 		collection: programmers,
 	}
 }
 
-func (db DB) GetProgrammers() ([]*model.Programmer, error) {
+func (db MongoDB) GetProgrammers() ([]*model.Programmer, error) {
 	res, err := db.collection.Find(context.TODO(), bson.M{})
 	if err != nil {
 		log.Printf("Error while fetching programmers: %s", err.Error())
