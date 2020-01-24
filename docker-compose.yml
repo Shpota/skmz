@@ -15,4 +15,4 @@ services:
     environment:
       MONGO_INITDB_DATABASE: programmers
     volumes:
-      - ./server/db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./server/db/mongo.init:/docker-entrypoint-initdb.d/mongo-init.js

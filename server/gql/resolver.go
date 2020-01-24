@@ -3,14 +3,15 @@ package gql
 import (
 	"context"
 	"github.com/shpota/skmz/db"
+	"github.com/shpota/skmz/gql/gen"
 	"github.com/shpota/skmz/model"
 )
 
 type Resolver struct {
-	DB *db.DB
+	DB db.DB
 }
 
-func (r *Resolver) Query() QueryResolver {
+func (r *Resolver) Query() gen.QueryResolver {
 	return &queryResolver{r}
 }
 

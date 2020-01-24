@@ -6,6 +6,7 @@ import (
 	"github.com/shpota/skmz/cors"
 	"github.com/shpota/skmz/db"
 	"github.com/shpota/skmz/gql"
+	"github.com/shpota/skmz/gql/gen"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -27,11 +28,11 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func gqlHandler(db *db.DB) http.HandlerFunc {
-	config := gql.Config{
+func gqlHandler(db db.DB) http.HandlerFunc {
+	config := gen.Config{
 		Resolvers: &gql.Resolver{DB: db},
 	}
-	gh := handler.GraphQL(gql.NewExecutableSchema(config))
+	gh := handler.GraphQL(gen.NewExecutableSchema(config))
 	if os.Getenv("profile") != "prod" {
 		gh = cors.Disable(gh)
 	}
