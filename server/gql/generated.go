@@ -48,6 +48,7 @@ type ComplexityRoot struct {
 		Name    func(childComplexity int) int
 		Picture func(childComplexity int) int
 		Skills  func(childComplexity int) int
+		Title   func(childComplexity int) int
 	}
 
 	Query struct {
@@ -115,6 +116,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Programmer.Skills(childComplexity), true
+
+	case "Programmer.title":
+		if e.complexity.Programmer.Title == nil {
+			break
+		}
+
+		return e.complexity.Programmer.Title(childComplexity), true
 
 	case "Query.programmers":
 		if e.complexity.Query.Programmers == nil {
@@ -203,6 +211,7 @@ var parsedSchema = gqlparser.MustLoadSchema(
 	&ast.Source{Name: "gql/schema.graphql", Input: `type Programmer {
     id: ID!
     name: String!
+    title: String!
     picture: String
     company: String!
     skills: [Skill!]!
@@ -332,6 +341,43 @@ func (ec *executionContext) _Programmer_name(ctx context.Context, field graphql.
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
 		return obj.Name, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Programmer_title(ctx context.Context, field graphql.CollectedField, obj *model.Programmer) (ret graphql.Marshaler) {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+		ec.Tracer.EndFieldExecution(ctx)
+	}()
+	rctx := &graphql.ResolverContext{
+		Object:   "Programmer",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Title, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1891,6 +1937,11 @@ func (ec *executionContext) _Programmer(ctx context.Context, sel ast.SelectionSe
 			}
 		case "name":
 			out.Values[i] = ec._Programmer_name(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "title":
+			out.Values[i] = ec._Programmer_title(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}

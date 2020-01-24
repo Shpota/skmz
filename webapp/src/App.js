@@ -4,36 +4,33 @@ import ApolloClient, {gql} from 'apollo-boost';
 import {Programmers} from "./programmers/Programmers";
 
 export class App extends Component {
-
     state = {
         programmers: []
     };
 
     constructor(props) {
         super(props);
-        this.client = new ApolloClient({
-            uri: '/query',
-        });
+        this.client = new ApolloClient({uri: '/query'});
     }
 
     componentDidMount() {
-        this.client.query(
-            {
-                query: gql`
-                    {
-                        programmers {
+        this.client.query({
+            query: gql`
+                {
+                    programmers {
+                        name,
+                        title,
+                        picture,
+                        company,
+                        skills{
                             name,
-                            picture,
-                            company,
-                            skills{
-                                name,
-                                icon,
-                                importance
-                            }
+                            icon,
+                            importance
                         }
                     }
-                `,
-            })
+                }
+            `
+        })
         .then(result => this.setState({
             programmers: result.data.programmers
         }));
