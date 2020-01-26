@@ -17,6 +17,6 @@ func (r *Resolver) Query() gen.QueryResolver {
 
 type queryResolver struct{ *Resolver }
 
-func (r *queryResolver) Programmers(ctx context.Context) ([]*model.Programmer, error) {
-	return r.DB.GetProgrammers()
+func (r *queryResolver) Programmers(ctx context.Context, skill string) ([]*model.Programmer, error) {
+	return r.DB.GetProgrammers(skill)
 }

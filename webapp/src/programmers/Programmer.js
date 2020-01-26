@@ -11,7 +11,7 @@ export function Programmer(props) {
             <div className="col s10">
                 <span className="name">{pr.name}</span>
                 <br/><span className="company">{pr.title} @ {pr.company}</span>
-                <br/><Skills skills={pr.skills}/>
+                <br/><Skills skills={pr.skills} search={props.search} updateSearch={props.updateSearch}/>
             </div>
         </div>
     </div>;

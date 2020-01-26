@@ -2,22 +2,48 @@ SKMZ [![Build Status](https://travis-ci.com/Shpota/skmz.svg?branch=master)](http
 ====
 
 A web application that allows to query programmers
-with their skills via a GraphQL API. The application
-is implemented with Go and 
-[gqlgen](https://github.com/99designs/gqlgen) on the
-backend side and and React on the front end side.
+with their skills via a **GraphQL** API. The
+application is implemented with **Go** and 
+**[gqlgen](https://github.com/99designs/gqlgen)**
+on the backend side and **React** on the front end
+side. **MongoDB** is used as a database.
+
+![Showcase](showcase.gif)
+
 
 ## System requirements 
 You need to have [Docker](https://www.docker.com) and
 [Docker Compose](https://docs.docker.com/compose/)
-installed in order to build and run the application.
-No additional tools required.
+installed. No additional tools required.
 
 ## How to build and run
 Perform 
-```shell script
+```sh
 docker-compose up
 ```
 Access the application via http://localhost:8080.
-Access the GraphQL API using 
-http://localhost:8080/playground 
+Access the GraphQL Playground using 
+http://localhost:8080/playground.
+
+## How to customize
+The database starts with a preloaded set of data which
+can be customized in 
+[the mongo.init file](server/db/mongo.init).  
+
+Here is an example of a GraphQL query which can be
+run in the Playground:
+```graphql
+query {
+  programmers(skill: "go") { 
+    name, 
+    picture, 
+    title,
+    company, 
+    skills {
+      name,
+      icon,
+      importance
+    }
+  }
+}
+```

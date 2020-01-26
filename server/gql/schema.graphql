@@ -15,5 +15,5 @@ type Skill {
 }
 
 type Query {
-    programmers: [Programmer!]!
+    programmers(skill: String!): [Programmer!]!
 }

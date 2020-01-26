@@ -1,22 +1,8 @@
 db.programmers.insert({
-    "name": "John Key",
-    "title": "Software Developer",
-    "company": "GitHub inc.",
-    "picture": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
-    "skills": [
-        {"name": "Java", "icon": "java", "importance": 5},
-        {"name": "Python", "icon": "python", "importance": 1},
-        {"name": "JPA", "importance": 0},
-        {"name": "Spring Boot", "importance": 0},
-        {"name": "Hibernate", "importance": 0},
-        {"name": "AWS", "icon": "aws", "importance": 3}
-    ]
-});
-db.programmers.insert({
     "name": "Ann Lee",
     "title": "Full Stack Developer",
     "company": "Google",
-    "picture": "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
+    "picture": "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "skills": [
         {"name": "JavaScript", "icon": "js", "importance": 5},
         {"name": "Java", "icon": "java", "importance": 0},
@@ -30,13 +16,97 @@ db.programmers.insert({
 db.programmers.insert({
     "name": "Mark Freiman",
     "title": "Mobile Developer",
-    "company": "Google",
-    "picture": "https://images.pexels.com/photos/935969/pexels-photo-935969.jpeg",
+    "company": "Spotify",
+    "picture": "https://images.pexels.com/photos/935969/pexels-photo-935969.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "skills": [
         {"name": "Swift", "icon": "swift", "importance": 5},
         {"name": "Objective C", "importance": 6},
         {"name": "Alamofire", "importance": 0},
-        {"name": "SwiftLint", "importance": 0},
-        {"name": "JavaScript", "icon": "js", "importance": 0}
+        {"name": "SwiftLint", "importance": 1}
+    ]
+});
+db.programmers.insert({
+    "name": "Tobi Schmidt",
+    "title": "Go Developer",
+    "company": "Amazon",
+    "picture": "https://images.pexels.com/photos/804009/pexels-photo-804009.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "skills": [
+        {"name": "Go", "importance": 5},
+        {"name": "C++", "importance": 0},
+        {"name": "Gorilla/Mux", "icon": "monkey", "importance": 0},
+        {"name": "GORM", "importance": 0},
+        {"name": "REST", "importance": 1},
+        {"name": "Java", "icon": "java", "importance": 0}
+    ]
+});
+db.programmers.insert({
+    "name": "Natasha Shevchenko",
+    "title": "Front End Developer",
+    "company": "Reddit",
+    "picture": "https://images.pexels.com/photos/1091659/pexels-photo-1091659.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "skills": [
+        {"name": "JavaScript", "icon": "js", "importance": 5},
+        {"name": "TypeScript", "importance": 6},
+        {"name": "Node.js", "icon": "node-js", "importance": 5},
+        {"name": "AWS", "icon": "aws", "importance": 3},
+        {"name": "React", "icon": "react", "importance": 5},
+        {"name": "Redux", "importance": 4},
+        {"name": "HTML", "icon": "html5", "importance": 1},
+        {"name": "CSS", "icon": "css3-alt", "importance": 1}
+    ]
+});
+db.programmers.insert({
+    "name": "Yaroslav Lapsha",
+    "title": "Software Developer",
+    "company": "Grammarly",
+    "picture": "https://images.pexels.com/photos/555790/pexels-photo-555790.png",
+    "skills": [
+        {"name": "JavaScript", "icon": "js", "importance": 6},
+        {"name": "TypeScript", "importance": 3},
+        {"name": "React", "icon": "react", "importance": 5},
+        {"name": "AWS", "icon": "aws", "importance": 3},
+        {"name": "HTML", "icon": "html5", "importance": 1},
+        {"name": "CSS", "icon": "css3-alt", "importance": 1}
+    ]
+});
+db.programmers.insert({
+    "name": "Bob Dogman",
+    "title": "Software Engineer",
+    "company": "Doggy Inc.",
+    "picture": "https://images.pexels.com/photos/245033/pexels-photo-245033.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "skills": [
+        {"name": "Rust", "importance": 5},
+        {"name": "C++", "importance": 1},
+        {"name": "Go", "importance": 1},
+        {"name": "Android", "icon": "android", "importance": 0},
+        {"name": "AWS", "icon": "aws", "importance": 1}
+    ]
+});
+db.programmers.insert({
+    "name": "John Key",
+    "title": "Software Developer",
+    "company": "GitHub Inc.",
+    "picture": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "skills": [
+        {"name": "Java", "icon": "java", "importance": 5},
+        {"name": "Python", "icon": "python", "importance": 1},
+        {"name": "JPA", "importance": 0},
+        {"name": "Spring Boot", "importance": 0},
+        {"name": "Hibernate", "importance": 0},
+        {"name": "AWS", "icon": "aws", "importance": 3}
+    ]
+});
+db.programmers.insert({
+    "name": "Doggy Dog",
+    "title": "Software Architect",
+    "company": "Doggy Inc.",
+    "picture": "https://images.pexels.com/photos/3487734/pexels-photo-3487734.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "skills": [
+        {"name": "Java", "icon": "java", "importance": 5},
+        {"name": "Python", "icon": "python", "importance": 1},
+        {"name": "C#", "importance": 0},
+        {"name": "Android", "icon": "android", "importance": 0},
+        {"name": "Azure", "importance": 0},
+        {"name": "AWS", "icon": "aws", "importance": 6}
     ]
 });

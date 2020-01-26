@@ -1,23 +1,28 @@
 import React, {Component} from 'react';
-import './App.css';
 import ApolloClient, {gql} from 'apollo-boost';
 import {Programmers} from "./programmers/Programmers";
+import {SearchBox} from "./search/SearchBox";
 
 export class App extends Component {
+    client = new ApolloClient({uri: '/query'});
     state = {
-        programmers: []
+        programmers: [],
+        search: ""
+    };
+    updateSearch = (search) => {
+        this.setState({search: search.trim()});
+        this.requestProgrammers(search.trim())
     };
 
-    constructor(props) {
-        super(props);
-        this.client = new ApolloClient({uri: '/query'});
+    componentDidMount() {
+        this.requestProgrammers(this.state.search);
     }
 
-    componentDidMount() {
+    requestProgrammers(search) {
         this.client.query({
             query: gql`
                 {
-                    programmers {
+                    programmers(skill: "${search}") {
                         name,
                         title,
                         picture,
@@ -38,7 +43,9 @@ export class App extends Component {
 
     render() {
         return <div className="container collection">
-            <Programmers programmers={this.state.programmers}/>
+            <SearchBox search={this.state.search} updateSearch={this.updateSearch}/>
+            <Programmers programmers={this.state.programmers}
+                         search={this.state.search} updateSearch={this.updateSearch}/>
         </div>;
     }
 }
