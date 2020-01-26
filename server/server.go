@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	client, err := mongoClient()
+	client, err := mongo.Connect(context.TODO(), clientOptions())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -39,13 +39,12 @@ func gqlHandler(db db.DB) http.HandlerFunc {
 	return gh
 }
 
-func mongoClient() (*mongo.Client, error) {
+func clientOptions() *options.ClientOptions {
 	host := "db"
 	if os.Getenv("profile") != "prod" {
 		host = "localhost"
 	}
-	opts := options.Client().ApplyURI(
+	return options.Client().ApplyURI(
 		"mongodb://" + host + ":27017",
 	)
-	return mongo.Connect(context.TODO(), opts)
 }
