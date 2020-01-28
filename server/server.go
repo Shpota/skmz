@@ -25,7 +25,8 @@ func main() {
 		handler.Playground("GraphQL playground", "/query"),
 	)
 	http.Handle("/", http.FileServer(http.Dir("/webapp")))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	err = http.ListenAndServe(":8080", nil)
+	log.Println(err)
 }
 
 func gqlHandler(db db.DB) http.HandlerFunc {
