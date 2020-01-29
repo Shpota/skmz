@@ -4,7 +4,9 @@ import {Programmers} from "./programmers/Programmers";
 import {SearchBox} from "./search/SearchBox";
 
 export class App extends Component {
-    client = new ApolloClient({uri: '/query'});
+    client = new ApolloClient({
+        uri: `${process.env.REACT_APP_API_URL}/query`
+    });
     state = {
         programmers: [],
         search: ""
